@@ -1,11 +1,10 @@
-
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { API } from "../api";
 export default function ExportTab(){
   const [start,setStart]=useState<string>(""); const [end,setEnd]=useState<string>("");
   const [children,setChildren]=useState(true); const [adj,setAdj]=useState(true); const [unsettled,setUnsettled]=useState(false);
-  function download(){ const p=new URLSearchParams(); if(start) p.set("start",start); if(end) p.set("end",end); p.set("children",String(children)); p.set("adjustments",String(adj)); p.set("unsettled",String(unsettled)); window.location.href = API(`/export/csv?${p.toString()}`); }
+  function download(){ const p=new URLSearchParams(); if(start) p.set("start",start); if(end) p.set("end",end); p.set("children",String(children)); p.set("adjustments",String(adj)); p.set("unsettled",String(unsettled)); window.location.href = API(/export/csv?); }
   return (<div className="stack"><div className="title">CSV Export</div><div className="row">
     <label>From<input type="date" className="input" value={start} onChange={e=>setStart(e.target.value)} /></label>
     <label>To<input type="date" className="input" value={end} onChange={e=>setEnd(e.target.value)} /></label>

@@ -1,7 +1,6 @@
-
-export function API(path: string) {
+﻿export function API(path: string) {
   const base = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
-  return `${base}${path}`;
+  return ${base};
 }
 async function handle<T>(r: Response): Promise<T> {
   const text = await r.text(); let data: any = null;

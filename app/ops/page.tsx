@@ -1,5 +1,4 @@
-
-"use client";
+﻿"use client";
 import { useEffect, useState } from "react";
 import { API, postJSON } from "../api";
 type Toast = { kind: "ok"|"err"|"info", msg: string };
@@ -7,8 +6,8 @@ export default function Ops(){
   const [code,setCode]=useState<string>(""); const [amount,setAmount]=useState<string>(""); const [toast,setToast]=useState<Toast|null>(null);
   useEffect(()=>{ function onKey(e:KeyboardEvent){ if(e.key==="?"){ e.preventDefault(); setToast({kind:"info",msg:"Shortcuts: C=Collect • R=Return • I=Cancel Instalment • B=Buyback • P=Payment • X=Export • /=Search Code"});} else if(e.key==="/"){ e.preventDefault(); (document.getElementById("orderCode") as HTMLInputElement|null)?.focus(); } else if(e.key.toLowerCase()==="p"){ sendPayment(); } else if(e.key.toLowerCase()==="r"){ sendEvent("RETURN"); } else if(e.key.toLowerCase()==="c"){ sendEvent("COLLECT"); } else if(e.key.toLowerCase()==="i"){ sendEvent("INSTALMENT_CANCEL"); } else if(e.key.toLowerCase()==="b"){ sendEvent("BUYBACK"); } else if(e.key.toLowerCase()==="x"){ window.location.href="/export"; } } window.addEventListener("keydown",onKey); return()=>window.removeEventListener("keydown",onKey);},[code,amount]);
   function note(kind:Toast["kind"], msg:string){ setToast({kind,msg}); setTimeout(()=>setToast(null),2500); }
-  async function sendEvent(kind: "COLLECT"|"RETURN"|"INSTALMENT_CANCEL"|"BUYBACK"){ if(!code.trim()){ note("err","Enter order code first"); return;} try{ await postJSON(API(`/orders/${encodeURIComponent(code)}/event`), { event: kind }); note("ok", `${kind} submitted`);}catch(e:any){ note("err", e?.message ?? "Failed"); } }
-  async function sendPayment(){ if(!code.trim()){ note("err","Enter order code first"); return;} const value=parseFloat(amount||"0"); if(!isFinite(value)||value<=0){ note("err","Enter a valid amount"); return;} try{ await postJSON(API(`/orders/${encodeURIComponent(code)}/payments`), { amount: value }); setAmount(""); note("ok","Payment recorded"); }catch(e:any){ note("err", e?.message ?? "Failed"); } }
+  async function sendEvent(kind: "COLLECT"|"RETURN"|"INSTALMENT_CANCEL"|"BUYBACK"){ if(!code.trim()){ note("err","Enter order code first"); return;} try{ await postJSON(API(/orders//event), { event: kind }); note("ok", ${kind} submitted);}catch(e:any){ note("err", e?.message ?? "Failed"); } }
+  async function sendPayment(){ if(!code.trim()){ note("err","Enter order code first"); return;} const value=parseFloat(amount||"0"); if(!isFinite(value)||value<=0){ note("err","Enter a valid amount"); return;} try{ await postJSON(API(/orders//payments), { amount: value }); setAmount(""); note("ok","Payment recorded"); }catch(e:any){ note("err", e?.message ?? "Failed"); } }
   return (<>
     <div className="grid cols-2">
       <div className="card stack"><div className="row"><div className="title" style={{flex:1}}>Search Order</div><kbd className="kbd">/</kbd></div><input id="orderCode" className="input" placeholder="Enter order code (e.g., OS-1234)" value={code} onChange={e=>setCode(e.target.value)} /></div>

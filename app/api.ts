@@ -1,11 +1,16 @@
 ﻿export function API(path: string) {
   const base = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
-  return ${base};
+  return `${base}${path}`;
 }
 async function handle<T>(r: Response): Promise<T> {
   const text = await r.text(); let data: any = null;
   try { data = text ? JSON.parse(text) : null; } catch {}
-  if (!r.ok) { const detail = (data?.detail ?? data?.message ?? text) || r.statusText; const err: any = new Error(detail); (err as any).status = r.status; (err as any).body = (data ?? text); throw err; }
+  if (!r.ok) {
+    const detail = (data?.detail ?? data?.message ?? text) || r.statusText;
+    const err: any = new Error(detail);
+    (err as any).status = r.status; (err as any).body = (data ?? text);
+    throw err;
+  }
   return (data as T);
 }
 export async function postJSON<T>(url: string, body: any, headers: Record<string,string> = {}): Promise<T> {

@@ -41,10 +41,7 @@ export default function Ops() {
   }
 
   async function sendEvent(kind: "COLLECT" | "RETURN" | "INSTALMENT_CANCEL" | "BUYBACK") {
-    if (!code.trim()) {
-      note("err", "Enter order code first");
-      return;
-    }
+    if (!code.trim()) { note("err", "Enter order code first"); return; }
     try {
       await postJSON(API(`/orders/${encodeURIComponent(code)}/event`), { event: kind });
       note("ok", `${kind} submitted`);
@@ -54,15 +51,9 @@ export default function Ops() {
   }
 
   async function sendPayment() {
-    if (!code.trim()) {
-      note("err", "Enter order code first");
-      return;
-    }
+    if (!code.trim()) { note("err", "Enter order code first"); return; }
     const value = parseFloat(amount || "0");
-    if (!isFinite(value) || value <= 0) {
-      note("err", "Enter a valid amount");
-      return;
-    }
+    if (!isFinite(value) || value <= 0) { note("err", "Enter a valid amount"); return; }
     try {
       await postJSON(API(`/orders/${encodeURIComponent(code)}/payments`), { amount: value });
       setAmount("");
@@ -80,7 +71,8 @@ export default function Ops() {
             <div className="title" style={{ flex: 1 }}>Search Order</div>
             <kbd className="kbd">/</kbd>
           </div>
-          <input id="orderCode" className="input" placeholder="Enter order code (e.g., OS-1234)" value={code} onChange={e => setCode(e.target.value)} />
+          <input id="orderCode" className="input" placeholder="Enter order code (e.g., OS-1234)"
+            value={code} onChange={e => setCode(e.target.value)} />
         </div>
 
         <div className="card stack">

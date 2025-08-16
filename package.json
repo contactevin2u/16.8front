@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "order-intake-cloud-ui",
   "private": true,
   "scripts": {
@@ -17,7 +17,5 @@
     "@types/react": "18.3.3",
     "typescript": "5.4.5"
   },
-  "engines": {
-    "node": ">=18.17 <21"
-  }
+  "engines": { "node": ">=18.17 <21" }
 }

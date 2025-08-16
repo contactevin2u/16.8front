@@ -1,5 +1,4 @@
-
-:root { --bg:#0b0b0c; --panel:#121214; --card:#171719; --border:#2a2a2d; --text:#f4f4f5; --muted:#9ca3af; --accent:#22c55e; --accent-2:#60a5fa; --danger:#ef4444; --warn:#f59e0b;}
+﻿:root { --bg:#0b0b0c; --panel:#121214; --card:#171719; --border:#2a2a2d; --text:#f4f4f5; --muted:#9ca3af; --accent:#22c55e; --accent-2:#60a5fa; --danger:#ef4444; --warn:#f59e0b;}
 *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif}
 a{color:var(--accent-2)} .container{max-width:1100px;margin:18px auto;padding:0 14px}
 .nav{display:flex;gap:14px;padding:12px 14px;align-items:center;background:var(--panel);border-bottom:1px solid var(--border)}
